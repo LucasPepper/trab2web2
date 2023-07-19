@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+   <title>Alunos</title>
+ </head>
+ <body>
+     <header>
+       <h3> <a href="http://127.0.0.1:8000/">Alunos</a> </h1>
+     </header>
+     <div class="container">
+     {% block content %}
+         <div class="details">
+         <p><strong>Nome</strong></p>
+         <p>{{ matricula.aluno }}</p>
+         <p><strong>Turma</strong></p>
+         <p>{{ matricula.turma }}</p>
+         <p><strong>Período</strong></p>
+         <p>{{ matricula.turma.periodo }}</p>
+         <p><strong>Nota</strong></p>
+         <p>{{ matricula.nota }}</p>
+         <p><strong>Situação</strong></p>
+         <p>{{ matricula.situacao_aluno }}</p>
+         </div>
+     {% endblock content %}
+     </div>
+ </body>
+ </html>

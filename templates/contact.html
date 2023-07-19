@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+<!DOCTYPE html> 
+<html lang="en">
+ <head>
+  {% bootstrap_css %}
+   <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Contato</title> 
+</head> 
+<body>
+     <header>
+       <h1> <a href="http://127.0.0.1:8000/alunos">Alunos</a> </h1>
+     </header>
+     {% block content %}
+
+     <div class="container">
+        <h1>Contato</h1>
+        {% bootstrap_messages %} <!-- Caso a mensagem não seja enviada por algum
+        
+        motivo, deixar uma mensagem -->
+        <form action="{% url 'contact' %}" method="post" class="form" autocomplete="off">
+          {% csrf_token %} <!-- Recurso de segurança do Django. Gera um token diferente
+          
+          para cada formulário e verifica se ninguém o alterou no meio do caminho -->
+          {% bootstrap_form form %} <!-- O bootstrap será aplicado em nosso form -->
+          {% buttons %} <!-- Cria um botão -->
+          <button type="submit" class="btn btn-primary"> Enviar Mensagem</button>
+          {% endbuttons %}
+
+        </form>
+      </div>
+      
+     {% endblock %}
+
+ </body> 
+</html>
