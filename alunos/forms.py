@@ -4,6 +4,31 @@ from .models import Aluno, Turma
 
 from django.core.mail.message import EmailMessage
 
+# Raw
+class RawAlunoForm(forms.Form):
+
+    nome = forms.CharField(label='Nome', max_length=100)
+    data_nascimento = forms.DateField(label='Data de Nascimento')
+    cpf = forms.CharField(label='CPF') # Somente números
+    rg = forms.CharField(label='RG') # Somente números 
+    email = forms.EmailField(label='E-mail')
+    # foto = forms.FileField()
+    curso = forms.CharField(label='Curso')
+    data_ingresso = forms.DateField(label='Data de Ingresso no Curso')
+
+class AlunoForm(forms.ModelForm):
+    class Meta:
+        model = Aluno
+        fields = [
+            'nome',
+            'data_nascimento',
+            'cpf',
+            'rg',
+            'email',
+            #'foto',
+            'curso',
+        ]
+
 class ContatoForm(forms.Form):
 
     nome = forms.CharField(label='Nome', max_length=100)

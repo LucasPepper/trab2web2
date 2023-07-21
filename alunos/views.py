@@ -4,9 +4,36 @@ from django.views import generic
 
 from .models import Aluno, Matricula
 
-from .forms import ContatoForm
+from .forms import ContatoForm, RawAlunoForm, AlunoForm
 
 from django.contrib import messages
+
+# def raw_aluno_create_view(request):
+#     form = RawAlunoForm(request.GET)
+#     if request.method == "POST":
+#         form = RawAlunoForm(request.POST)
+#         if form.is_valid():
+#             print(form.cleaned_data)
+#         else:
+#             print(form.errors)
+#     context = {
+#         "form": form
+#     }
+#     return render(request, "cadastro_aluno.html", context)
+
+def aluno_create_view(request):
+    form = AlunoForm(request.GET)
+    if request.method == "POST":
+        form = AlunoForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            # Aluno.objects.create()
+        else:
+            print(form.errors)
+    context = {
+        "form": form
+    }
+    return render(request, "create.html", context)
 
 def AlunosListView(request, *args, **kwargs):
     print(args, kwargs)
@@ -17,7 +44,7 @@ def AlunosListView(request, *args, **kwargs):
     context = {
         "alunos_list": queryset
     }
-    return render(request, "alunos.html", context)
+    return render(request, "alunos_cadastrados.html", context)
 
 class MatriculaDetailView(generic.DetailView): # matricula/ID_ALUNO
     template_name = 'matricula_detail.html'

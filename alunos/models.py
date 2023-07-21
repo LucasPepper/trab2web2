@@ -29,10 +29,11 @@ PERIODO_CHOICES = (
     ('2018/1', '2018/1'),
 )
 
+# Nome, Idade, Curso, Data de nascimento, CPF, RG, Data de ingresso na instituição, foto do aluno.
 class Aluno(models.Model):
     nome = models.CharField('Nome', max_length=100)
-    data_nascimento = models.DateField('Data de Nascimento')
-    periodoIngresso = models.CharField('Período de Ingresso', max_length=15, choices=PERIODO_CHOICES)
+    data_nascimento = models.DateField()
+    # data_ingresso = models.DateField('Data de Ingresso', default="2023-02-01")
     foto = models.ImageField(upload_to='images/')
     cpf = models.CharField('CPF', max_length=11) # Somente números
     rg = models.CharField('RG', max_length=8) # Somente números 

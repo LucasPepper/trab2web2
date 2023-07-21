@@ -16,17 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from alunos.views import AlunosListView, MatriculaDetailView, contact_view
+from alunos.views import AlunosListView, MatriculaDetailView, contact_view, aluno_create_view
 
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('alunos/', AlunosListView), #list_view
+    path('alunos_cadastrados/', AlunosListView), #list_view
     path('matricula/<int:pk>', MatriculaDetailView.as_view(), name='matricula-detail'), # detail_view matricula
-    path('contact/', contact_view, name='contact')
-
+    path('contact/', contact_view, name='contact'),
+    # path('cadastro_aluno/', raw_aluno_create_view, name='cadastro_aluno'),
+    path('create/', aluno_create_view)
 ]
 
 if settings.DEBUG:
