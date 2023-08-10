@@ -11,8 +11,8 @@ SITUACAO_ALUNO_CHOICES = (
 )
 
 CURSO_CHOICES = (
-    ('bsi', 'BSI'),
-    ('tads', 'TADS'),
+    ('BSI', 'BSI'),
+    ('TADS', 'TADS'),
 )
 
 PERIODO_CHOICES = (
@@ -33,7 +33,7 @@ PERIODO_CHOICES = (
 class Aluno(models.Model):
     nome = models.CharField('Nome', max_length=100)
     data_nascimento = models.DateField()
-    # data_ingresso = models.DateField('Data de Ingresso', default="2023-02-01")
+    data_ingresso = models.DateField('Data de Ingresso', default="2023-02-01")
     foto = models.ImageField(upload_to='images/')
     cpf = models.CharField('CPF', max_length=11) # Somente números
     rg = models.CharField('RG', max_length=8) # Somente números 

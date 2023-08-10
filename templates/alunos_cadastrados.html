@@ -9,7 +9,13 @@
       {% for aluno in alunos_list %}
       <!-- Display Alunos -->
       <li><a href="http://127.0.0.1:8000/matricula/{{ aluno.id }}">{{ aluno.nome }}</li></a>
-   
+
+      <p>Nome: {{ aluno.nome }}</p>
+      <p>Data de Nascimento: {{ aluno.data_nascimento }}</p>
+      <p>Curso: {{ aluno.curso }}</p>
+      <p>Data de Ingresso: {{ aluno.data_ingresso }}</p>
+      <p>E-mail: {{ aluno.email }}</p>
+
       <hr/>
       <!-- Se alunos_list estiver vazia -->
       {% empty %}

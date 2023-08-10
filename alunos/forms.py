@@ -12,7 +12,7 @@ class RawAlunoForm(forms.Form):
     cpf = forms.CharField(label='CPF') # Somente números
     rg = forms.CharField(label='RG') # Somente números 
     email = forms.EmailField(label='E-mail')
-    # foto = forms.FileField()
+    foto = forms.ImageField()
     curso = forms.CharField(label='Curso')
     data_ingresso = forms.DateField(label='Data de Ingresso no Curso')
 
@@ -22,10 +22,11 @@ class AlunoForm(forms.ModelForm):
         fields = [
             'nome',
             'data_nascimento',
+            'data_ingresso',
             'cpf',
             'rg',
             'email',
-            #'foto',
+            'foto',
             'curso',
         ]
 

@@ -27,7 +27,19 @@ def aluno_create_view(request):
         form = AlunoForm(request.POST)
         if form.is_valid():
             print(form.cleaned_data)
+            aluno = form.save()
             # Aluno.objects.create()
+            '''
+            nome = form.cleaned_data['nome']
+            data_nascimento = form.cleaned_date['data_nascimento']
+            cpf = form.cleaned_data['cpf']
+            rg = form.cleaned_data['rg']
+            curso = form.cleaned_data('Curso')
+            email = form.cleaned_data('E-mail')
+            aluno = Aluno(nome = nome, data_nascimento = datetime.now(), cpf = cpf, rg = rg, curso = curso, email = email)
+            '''
+            # redirect to a new URL:
+            #return HttpResponseRedirect('/success/')
         else:
             print(form.errors)
     context = {
@@ -45,6 +57,17 @@ def AlunosListView(request, *args, **kwargs):
         "alunos_list": queryset
     }
     return render(request, "alunos_cadastrados.html", context)
+
+def matriculaDetailView(request, *args, **kwargs):
+    print(args, kwargs)
+    print(request.user)
+
+    queryset = Aluno.objects.all()
+    queryset = queryset.order_by("nome")
+    context = {
+        "alunos_list": queryset
+    }
+    return render(request, "matricula_detail.html", context)
 
 class MatriculaDetailView(generic.DetailView): # matricula/ID_ALUNO
     template_name = 'matricula_detail.html'

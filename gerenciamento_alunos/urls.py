@@ -27,7 +27,7 @@ urlpatterns = [
     path('matricula/<int:pk>', MatriculaDetailView.as_view(), name='matricula-detail'), # detail_view matricula
     path('contact/', contact_view, name='contact'),
     # path('cadastro_aluno/', raw_aluno_create_view, name='cadastro_aluno'),
-    path('create/', aluno_create_view)
+    path('cadastro_aluno/', aluno_create_view)
 ]
 
 if settings.DEBUG:
