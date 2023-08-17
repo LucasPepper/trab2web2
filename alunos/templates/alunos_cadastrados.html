@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
 {% block content %}
 
@@ -7,28 +11,38 @@
    <ul>
       <!-- Itera sobre alunos_list -->
       {% for aluno in alunos_list %}
-      {% include "foto_modal.html" %}
       <!-- Display Alunos -->
-      <a href="{{ aluno.foto.url }}">{{ aluno.nome }}</li></a>
+      <a href="{{ aluno.foto.url }}">{{ aluno.nome }} </a>
       <p>Idade: {{ aluno.idade }}</p>
       <p>Data de Nascimento: {{ aluno.data_nascimento }}</p>
       <p>Curso: {{ aluno.curso }}</p>
       <p>Data de Ingresso: {{ aluno.data_ingresso }}</p>
       <p>E-mail: {{ aluno.email }}</p>
 
-      <p class="bg-info text-white pl-2">
-         {{aluno.nome}}
-       </p>
-
-      <div>
-         {{short_description}}
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+         Launch demo modal
+      </button>
+      
+      <!-- Button trigger modal -->
+      <a href="{{ aluno.foto.url }}" class="link-test" onclick=""  data-bs-toggle="modal" data-bs-target="#exampleModal"></a>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <img src="{{ aluno.foto.url }}"/>
+         </div>
       </div>
 
-      <hr/>
-      <!-- Se alunos_list estiver vazia -->
-      {% empty %}
-         <li>Não há Alunos cadastrados.</li>
-      {% endfor %}
    </ul>
-
+   <!-- Se alunos_list estiver vazia -->
+   {% empty %}
+      <p>Não há Alunos cadastrados.</p>
+   {% endfor %}
+   
 {% endblock %}
