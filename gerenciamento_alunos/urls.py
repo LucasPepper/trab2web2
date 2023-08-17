@@ -20,5 +20,6 @@ from alunos.views import AlunosListView, aluno_create_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('alunos_cadastrados/', AlunosListView), 
-    path('cadastro_aluno/', aluno_create_view)
+    path('cadastro_aluno/', aluno_create_view),
+    path('', AlunosListView)
 ]

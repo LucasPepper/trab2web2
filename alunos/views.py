@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from .models import Aluno
@@ -14,10 +15,9 @@ def aluno_create_view(request):
             print(form.cleaned_data)
             form.save()
 
-            '''
             # redirect to a new URL:
-            #return HttpResponseRedirect('/success/')
-            '''
+            return HttpResponseRedirect('/')
+            
         else:
             print(form.errors)
         
@@ -37,19 +37,3 @@ def AlunosListView(request, *args, **kwargs):
         "alunos_list": queryset
     }
     return render(request, "alunos_cadastrados.html", context)
-
-# def matriculaDetailView(request, *args, **kwargs):
-#     print(args, kwargs)
-#     print(request.user)
-
-#     queryset = Aluno.objects.all()
-#     queryset = queryset.order_by("nome")
-#     context = {
-#         "alunos_list": queryset
-#     }
-#     return render(request, "matricula_detail.html", context)
-
-# class MatriculaDetailView(generic.DetailView): # matricula/ID_ALUNO
-#     template_name = 'matricula_detail.html'
-#     model = Matricula
-#     queryset = Matricula.objects.all()
