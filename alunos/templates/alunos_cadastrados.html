@@ -7,14 +7,22 @@
    <ul>
       <!-- Itera sobre alunos_list -->
       {% for aluno in alunos_list %}
+      {% include "foto_modal.html" %}
       <!-- Display Alunos -->
-      <li><a href="http://127.0.0.1:8000/matricula/{{ aluno.id }}">{{ aluno.nome }}</li></a>
-
-      <p>Nome: {{ aluno.nome }}</p>
+      <a href="{{ aluno.foto.url }}">{{ aluno.nome }}</li></a>
+      <p>Idade: {{ aluno.idade }}</p>
       <p>Data de Nascimento: {{ aluno.data_nascimento }}</p>
       <p>Curso: {{ aluno.curso }}</p>
       <p>Data de Ingresso: {{ aluno.data_ingresso }}</p>
       <p>E-mail: {{ aluno.email }}</p>
+
+      <p class="bg-info text-white pl-2">
+         {{aluno.nome}}
+       </p>
+
+      <div>
+         {{short_description}}
+      </div>
 
       <hr/>
       <!-- Se alunos_list estiver vazia -->

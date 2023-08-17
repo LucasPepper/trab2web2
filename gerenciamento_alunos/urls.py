@@ -1,5 +1,4 @@
 """
-URL configuration for alunosMatricula project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -15,21 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from alunos.views import AlunosListView, MatriculaDetailView, contact_view, aluno_create_view
-
-from django.conf import settings
-from django.conf.urls.static import static
+from django.urls import path
+from alunos.views import AlunosListView, aluno_create_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('alunos_cadastrados/', AlunosListView), #list_view
-    path('matricula/<int:pk>', MatriculaDetailView.as_view(), name='matricula-detail'), # detail_view matricula
-    path('contact/', contact_view, name='contact'),
-    # path('cadastro_aluno/', raw_aluno_create_view, name='cadastro_aluno'),
+    path('alunos_cadastrados/', AlunosListView), 
     path('cadastro_aluno/', aluno_create_view)
 ]
-
-if settings.DEBUG:
-        urlpatterns += static(settings.MEDIA_URL,
-                              document_root=settings.MEDIA_ROOT)

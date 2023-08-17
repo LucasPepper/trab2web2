@@ -1,51 +1,31 @@
 from django.shortcuts import render
 
-from django.views import generic
+from .models import Aluno
 
-from .models import Aluno, Matricula
+from .forms import AlunoForm
 
-from .forms import ContatoForm, RawAlunoForm, AlunoForm
-
-from django.contrib import messages
-
-# def raw_aluno_create_view(request):
-#     form = RawAlunoForm(request.GET)
-#     if request.method == "POST":
-#         form = RawAlunoForm(request.POST)
-#         if form.is_valid():
-#             print(form.cleaned_data)
-#         else:
-#             print(form.errors)
-#     context = {
-#         "form": form
-#     }
-#     return render(request, "cadastro_aluno.html", context)
+from django.shortcuts import  render
+from django.core.files.storage import FileSystemStorage
 
 def aluno_create_view(request):
-    form = AlunoForm(request.GET)
     if request.method == "POST":
-        form = AlunoForm(request.POST)
+        form = AlunoForm(request.POST, request.FILES)
         if form.is_valid():
             print(form.cleaned_data)
-            aluno = form.save()
-            # Aluno.objects.create()
-            '''
-            nome = form.cleaned_data['nome']
-            data_nascimento = form.cleaned_date['data_nascimento']
-            cpf = form.cleaned_data['cpf']
-            rg = form.cleaned_data['rg']
-            curso = form.cleaned_data('Curso')
-            email = form.cleaned_data('E-mail')
-            aluno = Aluno(nome = nome, data_nascimento = datetime.now(), cpf = cpf, rg = rg, curso = curso, email = email)
+            form.save()
+
             '''
             # redirect to a new URL:
             #return HttpResponseRedirect('/success/')
+            '''
         else:
             print(form.errors)
+        
+    form = AlunoForm()
     context = {
         "form": form
     }
-    return render(request, "create.html", context)
+    return render(request, "cadastro_aluno.html", context)
 
 def AlunosListView(request, *args, **kwargs):
     print(args, kwargs)
@@ -58,42 +38,18 @@ def AlunosListView(request, *args, **kwargs):
     }
     return render(request, "alunos_cadastrados.html", context)
 
-def matriculaDetailView(request, *args, **kwargs):
-    print(args, kwargs)
-    print(request.user)
+# def matriculaDetailView(request, *args, **kwargs):
+#     print(args, kwargs)
+#     print(request.user)
 
-    queryset = Aluno.objects.all()
-    queryset = queryset.order_by("nome")
-    context = {
-        "alunos_list": queryset
-    }
-    return render(request, "matricula_detail.html", context)
+#     queryset = Aluno.objects.all()
+#     queryset = queryset.order_by("nome")
+#     context = {
+#         "alunos_list": queryset
+#     }
+#     return render(request, "matricula_detail.html", context)
 
-class MatriculaDetailView(generic.DetailView): # matricula/ID_ALUNO
-    template_name = 'matricula_detail.html'
-    model = Matricula
-    queryset = Matricula.objects.all()
-
-def contact_view(request, *args, **kwargs):
-
-    form = ContatoForm()
-    if request.method == 'POST':
-        form = ContatoForm(request.POST)
-        if form.is_valid():
-
-            nome = form.cleaned_data['nome']
-            email = form.cleaned_data['email']
-            assunto = form.cleaned_data['assunto']
-            mensagem = form.cleaned_data['mensagem']
-            
-            print('Mensagem Enviada')
-            messages.success(request, 'E-mail enviado com sucesso')
-            print(f'Nome: {nome}')
-            print(f'E-mail: {email}')
-            print(f'Assunto: {assunto}')
-            print(f'Mensagem: {mensagem}')
-            
-        else:
-            messages.error(request,'Erro ao enviar e-mail')
-
-    return render(request, 'contact.html', {'form': form})
+# class MatriculaDetailView(generic.DetailView): # matricula/ID_ALUNO
+#     template_name = 'matricula_detail.html'
+#     model = Matricula
+#     queryset = Matricula.objects.all()
