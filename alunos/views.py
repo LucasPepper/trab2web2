@@ -6,8 +6,10 @@ from .models import Aluno
 from .forms import AlunoForm
 
 from django.shortcuts import  render
-from django.core.files.storage import FileSystemStorage
 
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def aluno_create_view(request):
     if request.method == "POST":
         form = AlunoForm(request.POST, request.FILES)
